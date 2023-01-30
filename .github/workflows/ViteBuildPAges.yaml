@@ -24,14 +24,16 @@ jobs:
         run: |
           npm install
           npm run build -- --base=/${{ github.event.repository.name }}/
-      - name: Deploy to github pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
-        with:
-          branch: gh-pages
-          folder: dist
-
       - name: Publish deployed code 
         uses: actions/upload-artifact@v2
         with:
           name: published
           path: dist
+      - name: Deploy GitHub Pages site
+        uses: actions/deploy-pages@v1.2.3
+        with:
+           token: ${{ github.token }}
+    # Time in milliseconds after which to timeout and cancel the deployment (default: 10 minutes
+    # Name of the artifact to deploy
+           artifact_name: dist
+      
