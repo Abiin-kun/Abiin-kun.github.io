@@ -3,7 +3,10 @@ name: Build and deploy master
 on:
   push:
     branches: [master]
-
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   build:
     name: Build and deploy main
