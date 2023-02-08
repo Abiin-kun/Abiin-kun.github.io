@@ -4,6 +4,9 @@
   import Home from "./lib/Home.svelte";
   import {currentPage} from "./store.js";
   import WIP from "./lib/WIP.svelte";
+    import Blogs from './lib/Blogs.svelte';
+    import BlogsIlike from './lib/Blogs_Ilike.svelte';
+  
 
 </script>
 
@@ -12,7 +15,7 @@
       <p class="text" >Abhinn Pandey's Personal Space</p>
       <div class="items">
         <button on:click={() => $currentPage = "Home"}>Home</button>
-        <button on:click={() => $currentPage = "WIP"}>Blogs</button>
+        <button on:click={() => $currentPage = "Blogs"}>Blogs</button>
         <button on:click={() => $currentPage = "WIP"}>Projects</button>
         <button><a href="https://www.github.com/abiin-kun/">Github</a></button>
 
@@ -26,6 +29,14 @@
     {#if $currentPage === "Home"}
       <div class="container">
       <Home />
+      </div>
+      {:else if $currentPage === "Blogs_like"}
+      <div class="container">
+        <BlogsIlike/>
+      </div>
+      {:else if $currentPage === "Blogs"}
+      <div class="container">
+        <Blogs/>
       </div>
       {:else if $currentPage === "WIP"}
       <div class="container" style="background: black; height: 100%">
