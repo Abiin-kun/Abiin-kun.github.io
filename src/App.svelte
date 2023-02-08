@@ -50,6 +50,10 @@
 </main>
 
 <style>
+  *{
+    background-color: black;
+    color: white;
+  }
   .navbar {
     position: sticky;
     width: 100%;
