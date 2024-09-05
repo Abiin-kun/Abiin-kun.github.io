@@ -1,8 +1,6 @@
 # Abiin's Website
 
-```sh
-npm create astro@latest -- --template blog
-```
+
 ## Contributing
 > 🧑‍🚀 **Seasoned astronaut?** Want to Help ?
 
