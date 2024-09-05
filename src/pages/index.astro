@@ -1,0 +1,36 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🧑‍🚀 Hello, Traveller!</h1>
+			<p>
+				Welcome to my Website, I am Abhinn Pandey, Also known as Abiinkun.
+				I am a Programmer GOATED in Back-end, Game development and Low-level System Development.
+				</p><p>
+				Here one can find my blogs, About my projects and About me.
+			</p>
+			<p>
+				This Website is already <a href="https://github.com/Abiin-kun/Abiin-kun.github.io">Open-Sourced</a>, You can find the Source-code in my Github Profile.
+			</p>
+			<h3>Recent Projects</h3>
+			<ul style="list-style: armenian;">
+				<li>Quantum Leap - WIP</li>
+				<li>PigLang - an Simple Programming Language</li>
+				<li>HandSign an Signlanguage Translator</li>
+			</ul>
+			
+		</main>
+		<Footer />
+	</body>
+</html>
