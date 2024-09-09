@@ -42,6 +42,16 @@ body {
 	font-size: 20px;
 	line-height: 1.7;
 }
+button {
+	font-family: 'Atkinson', sans-serif;
+	background-color: white;
+	border-color: var(--accent);
+	font-weight: 700;
+}
+button:hover{
+	border-color: var(--accent-dark);
+}
+
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);

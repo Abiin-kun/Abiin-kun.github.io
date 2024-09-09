@@ -1,0 +1,45 @@
+---
+function getDocs(q: Query<unknown, DocumentData>) {
+throw new Error("Function not implemented.");
+}
+
+
+const post  = Astro.props;
+import { Query, query, where, type DocumentData } from "firebase/firestore";
+import { app } from "../firebase/server";
+import { getFirestore } from "firebase-admin/firestore";
+const db = getFirestore(app);
+const commentsRef = db.collection("comments").where("postId","==",post.slug).orderBy("timeAdded","desc");
+const commentsSnapshot = await commentsRef.get();
+
+const comments = commentsSnapshot.docs.map((doc) => ({
+  id: doc.id,
+  ...doc.data(),
+})) as Comments[];
+
+---
+<h2> Add a Comment ?</h2>
+<form method="post" action="/api/comments">
+    <input type="hidden" id="post" name="post" value={post.slug} />
+    <label for="author">Your Name</label>
+    <input type="text" id="author" name="author" />
+    <br>
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" />
+    <button type="submit">Add Comment !</button>
+  </form>
+  <hr>
+  <style is:global></style>
+<!-- <h2>{post.slug}</h2> -->
+<ul style="list-style: none;">
+{
+    comments.map((comment) => (
+      <li>
+        <h5>{comment.author}</h5> <p>{comment.timeAdded.toDate().toLocaleString("en-IN")}</p>
+        
+        <p>{comment.comment}</p>
+        <br/>
+        <hr>
+      </li>
+    ))
+  } </ul>

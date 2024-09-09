@@ -1,20 +1,31 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import Comments from '../../components/Comments.astro';
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
-}
+const posts = await getCollection('blog');
 type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+const { slug } = Astro.params;
+const post = posts.find((page) => page.slug === slug);
+if (!post) return Astro.redirect("/404");
 const { Content } = await post.render();
+import { Query, query, where, type DocumentData } from "firebase/firestore";
+import { app } from "../../firebase/server";
+import { getFirestore } from "firebase-admin/firestore";
+const db = getFirestore(app);
+const commentsRef = db.collection("comments").where("postId","==",post.slug);
+const commentsSnapshot = await commentsRef.get();
+
+const comments = commentsSnapshot.docs.map((doc) => ({
+  id: doc.id,
+  ...doc.data(),
+})) as Comments[];
 ---
 
 <BlogPost {...post.data}>
+	<!-- <h1>{post.data.title}</h1> -->
+	<h4>{comments.length} Comments</h4>
 	<Content />
+	<Comments {slug}/>
 </BlogPost>

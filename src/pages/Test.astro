@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout title="Add a comment" description="TEST"
+pubDate={new Date('25 Oct 2023')}
+heroImage="">
+  <h1>Add a comment</h1>
+  <form method="post" action="/api/comments">
+    <label for="post">PostID</label>
+    <input type="text" id="post" name="post" />
+    <label for="comment">Comment</label>
+    <input type="text" id="comment" name="comment" />
+    <label for="author">Author</label>
+    <input type="text" id="author" name="author" />
+    <button type="submit">Add comment</button>
+  </form>
+</Layout>
