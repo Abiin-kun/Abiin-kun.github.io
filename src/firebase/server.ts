@@ -4,7 +4,7 @@ import { initializeApp, cert, getApps } from "firebase-admin/app";
 const activeApps = getApps();
 const serviceAccount = {
   type: "service_account",
-  projectId: import.meta.env.FIREBASE_PROJECT_ID,
+  project_id: import.meta.env.FIREBASE_PROJECT_ID,
   private_key_id: import.meta.env.FIREBASE_PRIVATE_KEY_ID,
   private_key: import.meta.env.FIREBASE_PRIVATE_KEY,
   client_email: import.meta.env.FIREBASE_CLIENT_EMAIL,
@@ -16,11 +16,11 @@ const serviceAccount = {
 };
 
 const initApp = () => {
-  if (import.meta.env.PROD) {
-    console.info('PROD env detected. Using default service account.')
-    // Use default config in firebase functions. Should be already injected in the server by Firebase.
-    return initializeApp()
-  }
+  // if (import.meta.env.PROD) {
+  //   console.info('PROD env detected. Using default service account.')
+  //   // Use default config in firebase functions. Should be already injected in the server by Firebase.
+  //   return initializeApp()
+  // }
   console.info('Loading service account from env.')
   return initializeApp({
     credential: cert(serviceAccount as ServiceAccount)
